@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import { computed, } from 'vue';
-import { useMusicPlayer, type Track } from './useMusicPlayer';
+import { computed } from 'vue';
+import { Track, useMusicPlayer } from './useMusicPlayer';
 
-function getMusicUrl(name: string) {
-  return `https://howlerjs.com/assets/howler.js/examples/player/audio/${name}.webm`;
-}
-
-const playlist: Track[] = [
-  { title: 'Rave Digger', url: getMusicUrl('rave_digger') },
-  { title: '80s Vibe', url: getMusicUrl('80s_vibe') },
-  { title: 'Running Out', url: getMusicUrl('running_out') }
-];
+const props = defineProps<{
+  playlist: Track[];
+}>();
 
 const {
   currentTrack,
@@ -27,7 +21,7 @@ const {
   pause,
   skip,
   togglePlaylist,
-} = useMusicPlayer(playlist);
+} = useMusicPlayer(props.playlist);
 const formatTime = (secs: number): string => {
   const minutes = Math.floor(secs / 60) || 0;
   const seconds = (secs - minutes * 60) || 0;

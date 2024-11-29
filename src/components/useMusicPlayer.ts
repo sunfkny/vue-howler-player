@@ -6,7 +6,6 @@ export interface Track {
   url: string;
 }
 
-
 export function useMusicPlayer(_playlist: Track[]) {
   const playlist = ref(_playlist);
   const currentTrackIndex = ref(0);
@@ -107,7 +106,7 @@ export function useMusicPlayer(_playlist: Track[]) {
 
 
   onUnmounted(() => {
-    sound.value?.stop();
+    sound.value?.unload();
   });
 
   return {
